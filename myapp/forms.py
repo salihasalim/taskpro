@@ -2,6 +2,8 @@ from django import forms
 
 from myapp.models import Task
 
+from django.contrib.auth.models import User
+
 class TaskForm(forms.ModelForm):     
     
     class Meta:
@@ -28,14 +30,50 @@ class TaskForm(forms.ModelForm):
 
 
 
-#  class TaskForm(forms.ModelForm):     #modelform use cheythal fields automatically populate aakum modelsilum formilum seperate kodukanda
+# authentication 
 
-# from myapp.models import Task      model ivde import cheyyanam
+class RegistrationForm(forms.ModelForm):
 
-# class Meta: modelform use cheyyumbol meta class venam
+    class Meta:
 
-#  fields="__all__" task modelile ella fieldsum venam so all koduthu illel vendath list aku ko/duthathi
+        model=User
 
-# created_date auto now koduthitullathukond ath fieldsil venda so orennam mathram vendathond exclude koduthu
+        fields=["username","email","password"]
 
-# modelform style cheyyan widgets enna oru dictionary create cheyth key aayi column name koduth values kodukanam 
+        widgets={
+            
+
+            "username":forms.TextInput(attrs={"class":"form-control"}),
+
+            "email":forms.TextInput(attrs={"class":"form-control"}),
+
+            "password":forms.TextInput(attrs={"class":"form-control"})
+
+
+        }
+
+
+
+class SignInForm(forms.Form):
+
+    username=forms.CharField()
+
+    password=forms.CharField()
+
+
+
+
+
+
+
+# #  class TaskForm(forms.ModelForm):     #modelform use cheythal fields automatically populate aakum modelsilum formilum seperate kodukanda
+
+# # from myapp.models import Task      model ivde import cheyyanam
+
+# # class Meta: modelform use cheyyumbol meta class venam
+
+# #  fields="__all__" task modelile ella fieldsum venam so all koduthu illel vendath list aku ko/duthathi
+
+# # created_date auto now koduthitullathukond ath fieldsil venda so orennam mathram vendathond exclude koduthu
+
+# # modelform style cheyyan widgets enna oru dictionary create cheyth key aayi column name koduth values kodukanam 

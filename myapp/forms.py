@@ -43,11 +43,11 @@ class RegistrationForm(forms.ModelForm):
         widgets={
             
 
-            "username":forms.TextInput(attrs={"class":"form-control"}),
+            "username":forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"}),
 
-            "email":forms.TextInput(attrs={"class":"form-control"}),
+            "email":forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"}),
 
-            "password":forms.TextInput(attrs={"class":"form-control"})
+            "password":forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"})
 
 
         }
@@ -56,9 +56,11 @@ class RegistrationForm(forms.ModelForm):
 
 class SignInForm(forms.Form):
 
-    username=forms.CharField()
+    username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"})
+)
 
-    password=forms.CharField()
+    password=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;"}))
+
 
 
 

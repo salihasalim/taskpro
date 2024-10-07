@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 class Task(models.Model):
 
     title=models.CharField(max_length=200)
@@ -25,7 +27,8 @@ class Task(models.Model):
 
     status=models.CharField(max_length=200,choices=status_choices,default="pending")
 
-    user=models.CharField(max_length=200)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+
 
     updated_date=models.DateTimeField(auto_now=True)
 

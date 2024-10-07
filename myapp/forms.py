@@ -11,7 +11,7 @@ class TaskForm(forms.ModelForm):
         model=Task
 
         # fields="__all__"
-        exclude=("created_date","status")
+        exclude=("created_date","status","user")
 
         widgets={
             "title":forms.TextInput(attrs={"class":"form-control"}),
@@ -22,8 +22,7 @@ class TaskForm(forms.ModelForm):
 
             "category":forms.Select(attrs={"class":"form-control form-select"}),
 
-            "user":forms.TextInput(attrs={"class":"form-control"}),
-            
+           
                }
 
 
@@ -47,7 +46,7 @@ class RegistrationForm(forms.ModelForm):
 
             "email":forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"}),
 
-            "password":forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"})
+            "password":forms.PasswordInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"})
 
 
         }
@@ -56,10 +55,9 @@ class RegistrationForm(forms.ModelForm):
 
 class SignInForm(forms.Form):
 
-    username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"})
-)
+    username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"}))
 
-    password=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;"}))
+    password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control","style":"width:350px;height:40px;"}))
 
 
 

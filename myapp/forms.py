@@ -55,9 +55,9 @@ class RegistrationForm(forms.ModelForm):
 
 class SignInForm(forms.Form):
 
-    username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:350px;height:40px;margin-bottom:40px;"}))
+    username=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","style":"width:300px;height:40px;margin-bottom:40px;"}))
 
-    password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control","style":"width:350px;height:40px;"}))
+    password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control","style":"width:300px;height:40px;"}))
 
 
 

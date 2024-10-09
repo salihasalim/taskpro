@@ -21,8 +21,10 @@ from myapp.decorators import signin_required
 
 from django.utils.decorators import method_decorator
 
+from django.views.decorators.cache import never_cache
 
-@method_decorator(signin_required,name="dispatch")
+decs=[signin_required,never_cache]
+@method_decorator(decs,name="dispatch")
 
 class TaskCreateView(View):
 
@@ -54,7 +56,7 @@ class TaskCreateView(View):
 
 
 
-@method_decorator(signin_required,name="dispatch")
+@method_decorator(decs,name="dispatch")
 
 class TaskListView(View):
     def get(self,request,*args,**kwargs):
@@ -91,7 +93,7 @@ class TaskListView(View):
 
 
 
-@method_decorator(signin_required,name="dispatch")
+@method_decorator(decs,name="dispatch")
 
 class TaskDetailView(View):
 
@@ -108,7 +110,7 @@ class TaskDetailView(View):
         return render(request,"task_detail.html",{"task":qs})
 
 
-@method_decorator(signin_required,name="dispatch")
+@method_decorator(decs,name="dispatch")
 
 class TaskUpdateView(View):
 
@@ -211,7 +213,7 @@ class TaskUpdateView(View):
 
 
 
-@method_decorator(signin_required,name="dispatch")
+@method_decorator(decs,name="dispatch")
 
 class TaskDeleteView(View):
 
@@ -226,7 +228,7 @@ class TaskDeleteView(View):
 from django.db.models import Count
 
 
-@method_decorator(signin_required,name="dispatch")
+@method_decorator(decs,name="dispatch")
 
 class TaskSummaryView(View):
 
@@ -322,7 +324,7 @@ class SignInView(View):
 
 
 
-@method_decorator(signin_required,name="dispatch")
+@method_decorator(decs,name="dispatch")
 
 class SignOutView(View):
 

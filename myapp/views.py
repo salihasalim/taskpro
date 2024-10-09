@@ -17,7 +17,12 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate,login,logout
 
+from myapp.decorators import signin_required
 
+from django.utils.decorators import method_decorator
+
+
+@method_decorator(signin_required,name="dispatch")
 
 class TaskCreateView(View):
 
@@ -49,6 +54,7 @@ class TaskCreateView(View):
 
 
 
+@method_decorator(signin_required,name="dispatch")
 
 class TaskListView(View):
     def get(self,request,*args,**kwargs):
@@ -64,17 +70,19 @@ class TaskListView(View):
            
         if selected_category=="all":
 
-             qs=Task.objects.all()
+             qs=Task.objects.filter(user=request.user)
             
         else:
 
-            qs=Task.objects.filter(category=selected_category)
+            qs=Task.objects.filter(category=selected_category,user=request.user)
 
         
 
         if search_text!=None:
 
-            qs=Task.objects.filter(Q(title__icontains=search_text)|Q(description__icontains=search_text))
+            qs=task.objects.filter(user=request.user)
+
+            qs=qs.filter(Q(title__icontains=search_text)|Q(description__icontains=search_text))
 
 
 
@@ -83,6 +91,7 @@ class TaskListView(View):
 
 
 
+@method_decorator(signin_required,name="dispatch")
 
 class TaskDetailView(View):
 
@@ -99,6 +108,7 @@ class TaskDetailView(View):
         return render(request,"task_detail.html",{"task":qs})
 
 
+@method_decorator(signin_required,name="dispatch")
 
 class TaskUpdateView(View):
 
@@ -201,6 +211,7 @@ class TaskUpdateView(View):
 
 
 
+@method_decorator(signin_required,name="dispatch")
 
 class TaskDeleteView(View):
 
@@ -214,21 +225,24 @@ class TaskDeleteView(View):
 
 from django.db.models import Count
 
+
+@method_decorator(signin_required,name="dispatch")
+
 class TaskSummaryView(View):
 
+    
     def get(self,request,*args,**kwargs):
 
-        qs=Task.objects.all()
+        qs=Task.objects.filter(user=request.user)
 
         total_task_count=qs.count()
 
-        category_count=Task.objects.all().values("category").annotate(cat_count=Count("category"))
-        print(category_count)
+        category_count=qs.values("category").annotate(cat_count=Count("category"))
+        
 
 
-        status_summary=Task.objects.all().values("status").annotate(stat_count=Count("status"))
-        print(status_summary)
-
+        status_summary=qs.values("status").annotate(stat_count=Count("status"))
+        
         context={
             "total_task_count":total_task_count,
             "category_summary":category_count,
@@ -238,11 +252,6 @@ class TaskSummaryView(View):
         }
 
         return render(request,"task_summary.html",context)
-
-
-
-
-
 
 
 
@@ -313,6 +322,7 @@ class SignInView(View):
 
 
 
+@method_decorator(signin_required,name="dispatch")
 
 class SignOutView(View):
 

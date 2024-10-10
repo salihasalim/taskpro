@@ -253,7 +253,7 @@ class TaskSummaryView(View):
 
         }
 
-        return render(request,"task_summary.html",context)
+        return render(request,"dash_board.html",context)
 
 
 
@@ -336,3 +336,10 @@ class SignOutView(View):
 
 
 
+class DashBoardView(View):
+
+    template_name="dash_board.html"
+
+    def get (self,request,*args,**kwargs):
+
+        return render(request,self.template_name)

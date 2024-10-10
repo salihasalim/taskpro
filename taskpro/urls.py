@@ -27,5 +27,6 @@ urlpatterns = [
     path("",views.TaskSummaryView.as_view(),name="task_summary"),
     path("register/",views.SignupView.as_view(),name="signup"),
     path("signin/",views.SignInView.as_view(),name="signin"),
-    path("signout/",views.SignOutView.as_view(),name="signout")
+    path("signout/",views.SignOutView.as_view(),name="signout"),
+    path("dashboard/",views.DashBoardView.as_view(),name="dashboard")
 ]
